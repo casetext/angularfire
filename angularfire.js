@@ -146,8 +146,8 @@
       var self = this;
       var object = {};
 
-      // Set the $id val equal to the Firebase reference's name() function.
-      object.$id = self._fRef.ref().name();
+      // Set the $id val equal to the Firebase reference's key() function.
+      object.$id = self._fRef.ref().key();
 
       // Establish a 3-way data binding (implicit sync) with the specified
       // Firebase location and a model on $scope. To be used from a controller
@@ -175,7 +175,7 @@
       // This function returns a promise that will be resolved when the data
       // has been successfully written to the server. If the promise is
       // resolved, it will be provided with a reference to the newly added
-      // object or primitive. The key name can be extracted using `ref.name()`.
+      // object or primitive. The key name can be extracted using `ref.key()`.
       // If the promise fails, it will resolve to an error.
       object.$add = function(item) {
         var ref;
@@ -437,7 +437,7 @@
 
       // store changes to children and update the index of keys appropriately
       function _processSnapshot(snapshot, prevChild) {
-        var key = snapshot.name();
+        var key = snapshot.key();
         var val = snapshot.val();
 
         // If the item already exists in the index, remove it first.
@@ -467,7 +467,7 @@
       function _handleAndBroadcastEvent(type, handler) {
         return function(snapshot, prevChild) {
           handler(snapshot, prevChild);
-          self._broadcastEvent(type, self._makeEventSnapshot(snapshot.name(), snapshot.val(), prevChild));
+          self._broadcastEvent(type, self._makeEventSnapshot(snapshot.key(), snapshot.val(), prevChild));
         };
       }
 
@@ -479,7 +479,7 @@
       _handleFirebaseEvent("child_changed", _processSnapshot);
       _handleFirebaseEvent("child_removed", function(snapshot) {
         // Remove from index.
-        var key = snapshot.name();
+        var key = snapshot.key();
         var idx = self._index.indexOf(key);
         self._index.splice(idx, 1);
 
@@ -537,7 +537,7 @@
         }
 
         // broadcast the value event
-        self._broadcastEvent('value', self._makeEventSnapshot(snap.name(), value));
+        self._broadcastEvent('value', self._makeEventSnapshot(snap.key(), value));
 
         // broadcast initial loaded event once data and indices are set up appropriately
         if( !self._loaded ) {
@@ -651,7 +651,7 @@
             callback(parsedValue);
             break;
           case 'value':
-            callback(self._makeEventSnapshot(self._fRef.name(), parsedValue, null));
+            callback(self._makeEventSnapshot(self._fRef.key(), parsedValue, null));
             break;
           case 'child_added':
             self._iterateChildren(parsedValue, function(name, val, prev) {
