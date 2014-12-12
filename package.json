@@ -1,14 +1,14 @@
 {
-  "name": "angularfire",
-  "version": "0.7.1",
-  "description": "An officially supported AngularJS binding for Firebase.",
+  "name": "angularfire-legacy",
+  "version": "0.7.2",
+  "description": "A hacky fork of the officially supported AngularJS binding for Firebase.  Patches the 0.7 branch to work with Firebase client 2.0.",
   "main": "angularfire.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/firebase/angularFire.git"
+    "url": "https://github.com/casetext/angularFire.git"
   },
   "bugs": {
-    "url": "https://github.com/firebase/angularFire/issues"
+    "url": "https://github.com/casetext/angularFire/issues"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
