@@ -1,6 +1,6 @@
 {
   "name": "angularfire-legacy",
-  "version": "0.7.2",
+  "version": "0.7.3",
   "description": "A hacky fork of the officially supported AngularJS binding for Firebase.  Patches the 0.7 branch to work with Firebase client 2.0.",
   "main": "angularfire.js",
   "repository": {

@@ -5,7 +5,7 @@
 // as normal, except that the changes are also sent to all other clients
 // instead of just a server.
 //
-//      AngularFire 0.7.2
+//      AngularFire 0.7.3
 //      http://angularfire.com
 //      License: MIT
 
@@ -776,12 +776,16 @@
     _parseObject: function(obj) {
       function _findReplacePriority(item) {
         for (var prop in item) {
-          if (item.hasOwnProperty(prop)) {
-            if (prop == "$priority") {
-              item[".priority"] = item.$priority;
-              delete item.$priority;
-            } else if (typeof item[prop] == "object") {
-              _findReplacePriority(item[prop]);
+          if (prop[0] == '$') {
+            delete item[prop];
+          } else {
+            if (item.hasOwnProperty(prop)) {
+              if (prop == "$priority") {
+                item[".priority"] = item.$priority;
+                delete item.$priority;
+              } else if (typeof item[prop] == "object") {
+                _findReplacePriority(item[prop]);
+              }
             }
           }
         }
